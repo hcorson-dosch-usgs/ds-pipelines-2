@@ -15,11 +15,29 @@ targets:
   all:
     depends: 3_visualize/out/figure_1.png
   
-  raw_downloads:
-    command: download_nwis_site_data()
+  data_files:
+    command: generate_files()
+
+  1_fetch/out/nwis_01427207_data.csv:
+    command: download_nwis_site_data(target_name)
+
+  1_fetch/out/nwis_01432160_data.csv:
+    command: download_nwis_site_data(target_name)
+
+  1_fetch/out/nwis_01435000_data.csv:
+    command: download_nwis_site_data(target_name)
+
+  1_fetch/out/nwis_01436690_data.csv:
+    command: download_nwis_site_data(target_name)
+
+  1_fetch/out/nwis_01466500_data.csv:
+    command: download_nwis_site_data(target_name)
+
+  1_fetch/out/nwis_01477050_data.csv:
+    command: download_nwis_site_data(target_name)
 
   site_data:
-    command: import_nwis_data(raw_downloads)
+    command: import_nwis_data(data_files)
 
   1_fetch/out/site_info.csv:
     command: nwis_site_info(target_name, site_data)
