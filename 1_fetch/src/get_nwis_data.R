@@ -25,7 +25,7 @@ download_nwis_site_data <- function(filepath, parameterCd = '00010', startDate="
   write_csv(data_out, path = filepath)
 }
 
-import_nwis_data <- function(...) {
+import_nwis_data <- function(filepath, ...) {
   download_files <- c(...)
   data_out <- data.frame(agency_cd = c(), site_no = c(), dateTime = c(), 
                          X_00010_00000 = c(), X_00010_00000_cd = c(), tz_cd = c())
@@ -35,11 +35,12 @@ import_nwis_data <- function(...) {
     these_data <- read_csv(download_file, col_types = 'ccTdcc')
     data_out <- rbind(data_out, these_data)
   }
-  return(data_out)
+  write_csv(data_out, path = filepath)
 }
 
-nwis_site_info <- function(fileout, site_data){
+nwis_site_info <- function(site_data_file){
+  site_data <- read_csv(site_data_file)
   site_no <- unique(site_data$site_no)
   site_info <- dataRetrieval::readNWISsite(site_no)
-  write_csv(site_info, fileout)
+  return(site_info)
 }
