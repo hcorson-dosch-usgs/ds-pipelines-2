@@ -5,9 +5,8 @@ generate_files <- function(site_nums = c("01427207", "01432160", "01435000", "01
   
   return(download_files)
 }
-# 2014-05-01
 
-download_nwis_site_data <- function(filepath, parameterCd = '00010', startDate="2013-05-01", endDate="2015-05-01"){
+download_nwis_site_data <- function(filepath, parameterCd = '00010', startDate="2014-05-01", endDate="2015-05-01"){
   # filepaths look something like directory/nwis_01432160_data.csv,
   # remove the directory with basename() and extract the 01432160 with the regular expression match
   site_num <- basename(filepath) %>% 
