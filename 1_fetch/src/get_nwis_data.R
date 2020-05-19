@@ -5,9 +5,9 @@ generate_files <- function(site_nums = c("01427207", "01432160", "01435000", "01
   
   return(download_files)
 }
+# 2014-05-01
 
-
-download_nwis_site_data <- function(filepath, parameterCd = '00010', startDate="2014-05-01", endDate="2015-05-01"){
+download_nwis_site_data <- function(filepath, parameterCd = '00010', startDate="2013-05-01", endDate="2015-05-01"){
   # filepaths look something like directory/nwis_01432160_data.csv,
   # remove the directory with basename() and extract the 01432160 with the regular expression match
   site_num <- basename(filepath) %>% 
@@ -26,7 +26,8 @@ download_nwis_site_data <- function(filepath, parameterCd = '00010', startDate="
   write_csv(data_out, path = filepath)
 }
 
-import_nwis_data <- function(download_files) {
+import_nwis_data <- function(...) {
+  download_files <- c(...)
   data_out <- data.frame(agency_cd = c(), site_no = c(), dateTime = c(), 
                          X_00010_00000 = c(), X_00010_00000_cd = c(), tz_cd = c())
   
